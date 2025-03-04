@@ -1,0 +1,3 @@
+#!/home/chinwutem/Documents/data_engineering/my_projects/end2end/realtime_data_streaming/py_env/bin/python3.9
+from spark import spark_admin
+spark_admin.main()
