@@ -3,6 +3,13 @@
 ## 📜 Table of Contents
 - [System architecture](#System-architecture)
 - [Overview](#Overview)
+- [Key Components](#Key-Components)
+- [System Workflow](#System-Workflow)
+- [Key Features](#Key-Features)
+- [Business Value](#Business-Value)
+- [Technical challenges and solutions](#Technical-Challenges-And-Solutions)
+- [Setup Instructions](#Setup-Instructions)
+- [Trouble Shooting](#Trouble-Shooting)
 
 ## System architecture:
 
@@ -61,7 +68,7 @@ processing architecture that is easy to deploy, manage, and scale.
 - Orchestration: Automates and monitors data pipelines using Airflow.
 - Containerization: Uses Docker to ensure consistency, portability, and ease of deployment.
 
-#### Business Value:
+## Business Value:
 ##### This system enables businesses to:
 - Process and analyze real-time data streams (e.g., user events, IoT sensor data).
 - Generate real-time insights for decision-making (e.g., click-through rates, anomaly detection).
@@ -97,7 +104,7 @@ Cassandra: Stores processed data.
 Spark: Processes streaming data.
 Airflow: Orchestrates data pipelines.
 
-## Step 3: Verify Services:
+##### Step 3: Verify Services:
 ##### Kafka:
 Create a Kafka topic:
 ```bash
@@ -135,26 +142,20 @@ To stop all services, run:
 ```bash
 docker-compose down
 ```
-##### Troubleshooting:
-Kafka Broker Not Available:
-
+## Troubleshooting:
+##### Kafka Broker Not Available:
 Ensure Kafka and Zookeeper are running:
-
-bash
-Copy
+```
 docker logs kafka1
 docker logs zookeeper1
-Cassandra Connection Issues:
-
+```
+##### Cassandra Connection Issues:
 Verify that Cassandra is running and accessible:
-
-bash
-Copy
+```
 docker logs cassandra
-Spark Job Failures:
-
+```
+##### Spark Job Failures:
 Check the Spark logs for errors:
-
-bash
-Copy
+```
 docker logs spark-master
+```
