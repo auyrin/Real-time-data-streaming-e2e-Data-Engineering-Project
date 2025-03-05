@@ -1,5 +1,12 @@
 # Realtime Data Streaming | End-to-End Data Engineering Project
 
+## 📜 Table of Contents
+- [System architecture](#System-architecture)
+- [Overview](#Overview)
+
+## System architecture:
+
+
 ## Overview:
 This project is a real-time data streaming and processing pipeline designed to handle high-velocity data streams, perform real-time analytics, 
 and store processed data for further querying and analysis. The system leverages modern big data technologies such as Apache Kafka, Apache Spark, 
@@ -54,12 +61,100 @@ processing architecture that is easy to deploy, manage, and scale.
 - Orchestration: Automates and monitors data pipelines using Airflow.
 - Containerization: Uses Docker to ensure consistency, portability, and ease of deployment.
 
-## Use Cases:
-1. #### Real-Time User Analytics:
-- Process user events (e.g., clicks, purchases) in real-time to generate insights and metrics.
+#### Business Value:
+##### This system enables businesses to:
+- Process and analyze real-time data streams (e.g., user events, IoT sensor data).
+- Generate real-time insights for decision-making (e.g., click-through rates, anomaly detection).
+- Scale seamlessly to handle large volumes of data.
+- Reduce deployment and maintenance overhead using Docker."
 
-2. #### IoT Data Processing:
-- Handle high-velocity sensor data streams and perform real-time anomaly detection.
+## Technical Challenges and Solutions:
+##### Some challenges I faced included:
+- Kafka broker connectivity issues: Resolved by ensuring proper configuration of KAFKA_ADVERTISED_LISTENERS and verifying Zookeeper connectivity.
+- Spark-Cassandra integration: Addressed by using the spark-cassandra-connector library and optimizing data writes.
+- Docker networking: Solved by creating a dedicated Docker network (kafka-net) for seamless communication between containers."
 
-3. #### Log Processing:
-- Ingest and analyze log data in real-time for monitoring and troubleshooting.
+## Setup Instructions
+##### Prerequisites:
+**Docker**: Install Docker from https://www.docker.com/get-started.
+**Docker Compose**: Ensure Docker Compose is installed (usually comes with Docker Desktop).
+**Git**: Install Git from https://git-scm.com/.
+
+##### Step 1: Clone the Repository:
+Clone the project repository to your local machine:
+```bash
+git clone https://github.com/auyrin/Real-time-data-streaming-e2e-Data-Engineering-Project.git
+cd Real-time-data-streaming-e2e-Data-Engineering-Project
+```
+##### Step 2: Start the System:
+```bash
+docker-compose up -d
+```
+###### This will start the following services:
+Zookeeper: Manages Kafka brokers.
+Kafka: Handles real-time data streaming.
+Cassandra: Stores processed data.
+Spark: Processes streaming data.
+Airflow: Orchestrates data pipelines.
+
+## Step 3: Verify Services:
+##### Kafka:
+Create a Kafka topic:
+```bash
+docker exec -it kafka1 kafka-topics --create --bootstrap-server localhost:9093 --topic users_created --partitions 1 --replication-factor 1
+```
+List topics to verify:
+```bash
+docker exec -it kafka1 kafka-topics --list --bootstrap-server localhost:9093
+```
+##### Cassandra:
+Connect to Cassandra using cqlsh:
+```bash
+docker exec -it cassandra cqlsh
+```
+##### Airflow:
+Access the Airflow UI at http://localhost:8083.
+Default credentials: admin / admin.
+
+##### Spark:
+Access the Spark UI at http://localhost:9090.
+
+##### Step 4: Run the Spark Streaming Application:
+Submit the Spark Streaming job:
+```bash
+spark-submit spark_stream.py
+```
+Verify that data is being processed and stored in Cassandra.
+in cassandra:
+```
+select * from spark_streams.created_users;
+```
+
+##### Step 5: Stop the System:
+To stop all services, run:
+```bash
+docker-compose down
+```
+##### Troubleshooting:
+Kafka Broker Not Available:
+
+Ensure Kafka and Zookeeper are running:
+
+bash
+Copy
+docker logs kafka1
+docker logs zookeeper1
+Cassandra Connection Issues:
+
+Verify that Cassandra is running and accessible:
+
+bash
+Copy
+docker logs cassandra
+Spark Job Failures:
+
+Check the Spark logs for errors:
+
+bash
+Copy
+docker logs spark-master
