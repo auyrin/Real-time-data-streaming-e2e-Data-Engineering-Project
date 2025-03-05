@@ -9,10 +9,10 @@
 - [Business Value](#Business-Value)
 - [Technical challenges and solutions](#Technical-Challenges-And-Solutions)
 - [Setup Instructions](#Setup-Instructions)
-- [Trouble Shooting](#Trouble-Shooting)
+- [TroubleShooting](#Trouble-Shooting)
 
 ## System architecture:
-
+![System Architecture Diagram](system-architecture.png)
 
 ## Overview:
 This project is a real-time data streaming and processing pipeline designed to handle high-velocity data streams, perform real-time analytics, 
@@ -131,9 +131,9 @@ Submit the Spark Streaming job:
 ```bash
 spark-submit spark_stream.py
 ```
-Verify that data is being processed and stored in Cassandra.
-in cassandra:
+Verify that data is being processed and stored in Cassandra:
 ```
+docker exec -it cassandra cqlsh
 select * from spark_streams.created_users;
 ```
 
@@ -142,7 +142,7 @@ To stop all services, run:
 ```bash
 docker-compose down
 ```
-## Troubleshooting:
+## TroubleShooting:
 ##### Kafka Broker Not Available:
 Ensure Kafka and Zookeeper are running:
 ```
