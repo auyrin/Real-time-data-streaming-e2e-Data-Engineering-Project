@@ -12,7 +12,7 @@
 - [TroubleShooting](#Trouble-Shooting)
 
 ## System architecture:
-![System Architecture](system-architecture.png)
+![System-Architecture](system-architecture.png)
 
 ## Overview:
 This project is a real-time data streaming and processing pipeline designed to handle high-velocity data streams, perform real-time analytics, 
